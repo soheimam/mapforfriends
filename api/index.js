@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser')
+const db = require('../database/db')
 
 const ejs = require('ejs')
 const app = express()
@@ -7,6 +8,7 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.set('view engine', 'ejs')
+const pool = db.connect()
 
 app.get('/', (req, res) => {
     res.render('index')
@@ -16,8 +18,16 @@ app.get('/login', (req, res) => {
     res.render('login')
 })
 
-app.post('/login', (req, res) => {
+app.post('/auth/register', async(req, res) => {
     console.log(req.body)
+    const req = await db.query(pool, 'INSERT INTO users(name, email) VALUES($1, $2) RETURNING *' , [req.body.name, req.body.email])
+    // WIth the req body data we can add the user to db
+    res.render('dashboard', {username: req.body.firstname})
+})
+
+app.post('/auth/login', async(req, res) => {
+    console.log(req.body)
+    await db.query(pool, 'SELECT * FROM users')
     // WIth the req body data we can add the user to db
     res.render('dashboard', {username: req.body.firstname})
 })
