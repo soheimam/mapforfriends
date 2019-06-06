@@ -18,14 +18,18 @@ app.get('/login', (req, res) => {
     res.render('login')
 })
 
-app.post('/auth/register', async(req, res) => {
-    console.log(req.body)
-    const req = await db.query(pool, 'INSERT INTO users(name, email) VALUES($1, $2) RETURNING *' , [req.body.name, req.body.email])
-    // WIth the req body data we can add the user to db
-    res.render('dashboard', {username: req.body.firstname})
+app.get('/register', (req, res) => {
+    res.render('register')
 })
 
-app.post('/auth/login', async(req, res) => {
+app.post('/register', async(req, res) => {
+    console.log(req.body)
+    const query = await db.query(pool, 'INSERT INTO users(email, password) VALUES($1, $2) RETURNING *', [req.body.email, req.body.password])
+    // WIth the req body data we can add the user to db
+    res.render('dashboard', {username: req.body.email})
+})
+
+app.post('/login', async(req, res) => {
     console.log(req.body)
     await db.query(pool, 'SELECT * FROM users')
     // WIth the req body data we can add the user to db

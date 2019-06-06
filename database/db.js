@@ -2,7 +2,6 @@
 const { Pool } = require('pg')
 require('dotenv').config()
 
-console.log(process.env)
 
 function connect(){
     return new Pool({
@@ -13,8 +12,8 @@ function connect(){
     })
 }
 
-async function query(pool, query){
-    const res = await pool.query(query)
+async function query(pool, query, values){
+    const res = await pool.query(query, values)
     console.log(res)
     await pool.end()
     return res
