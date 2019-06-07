@@ -10,6 +10,8 @@ app.use(bodyParser.json())
 app.set('view engine', 'ejs')
 const pool = db.connect()
 
+app.use(express.static('public'))
+
 app.get('/', (req, res) => {
     res.render('index')
 })
