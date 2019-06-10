@@ -5,7 +5,9 @@ const db = require('../database/db')
 const ejs = require('ejs')
 const app = express()
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
 app.use(bodyParser.json())
 app.set('view engine', 'ejs')
 const pool = db.connect()
@@ -24,18 +26,28 @@ app.get('/register', (req, res) => {
     res.render('register')
 })
 
-app.post('/register', async(req, res) => {
-    console.log(req.body)
-    const query = await db.query(pool, 'INSERT INTO users(email, password) VALUES($1, $2) RETURNING *', [req.body.email, req.body.password])
-    // WIth the req body data we can add the user to db
-    res.render('dashboard', {username: req.body.email})
+app.post('/register', async (req, res) => {
+    // we execute a sql query to find if the user exist in th db
+    const user = await db.query(pool, `SELECT * FROM users WHERE email='${req.body.email}'`)
+
+    // we test if the user exist if it does not we insert into 
+    if (req.body.email !== user.rows[0].email) {
+        const query = await db.query(pool, 'INSERT INTO users(email, password) VALUES($1, $2) RETURNING *', [req.body.email, req.body.password])
+        return res.render('dashboard', {
+            username: query.email
+        })
+    }
+    return res.redirect('/login')
 })
 
-app.post('/login', async(req, res) => {
-    console.log(req.body)
-    await db.query(pool, 'SELECT * FROM users')
-    // WIth the req body data we can add the user to db
-    res.render('dashboard', {username: req.body.firstname})
+app.post('/login', async (req, res) => {
+    const user = await db.query(pool, `SELECT * FROM users WHERE email='${req.body.email}'`)
+    if (req.body.password === user.rows[0].password) {
+        return res.render('dashboard', {
+            username: req.body.email
+        })
+    }
+    return res.redirect('/login')
 })
 
 app.get('/bars', (req, res) => {
