@@ -5,7 +5,9 @@ const db = require('../database/db')
 const ejs = require('ejs')
 const app = express()
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
 app.use(bodyParser.json())
 app.set('view engine', 'ejs')
 const pool = db.connect()
@@ -23,7 +25,6 @@ app.get('/login', (req, res) => {
 app.get('/register', (req, res) => {
     res.render('register')
 })
-
 
 app.post('/register', async (req, res) => {
     // we execute a sql query to find if the user exist in th db

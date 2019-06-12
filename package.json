@@ -9,12 +9,15 @@
     "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "pg": "^7.11.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node api/index.js"
+    "start": "node api/index.js",
+    "seed": "node database/seeder/seeder.js",
+    "unseed": "node database/seeder/unseeder.js"
   },
   "repository": {
     "type": "git",

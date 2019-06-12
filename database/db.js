@@ -1,7 +1,6 @@
-// all heleprs functions for the databse
-const { Pool } = require('pg')
 require('dotenv').config()
 
+const { Pool } = require('pg')
 
 function connect(){
     return new Pool({
@@ -14,8 +13,7 @@ function connect(){
 
 async function query(pool, query, values){
     const res = await pool.query(query, values)
-    console.log(res)
-    await pool.end()
+    //await pool.end()
     return res
 }
 
