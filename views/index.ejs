@@ -1,5 +1,97 @@
+<!DOCTYPE html>
 <html>
-    <h1>
-        Hello world!
-    </h1>
+<head>
+<meta charset="UTF-8">
+<title>Map for friends</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+</head>
+
+
+
+<body>
+    
+<div id="form">
+  <div class="container">
+    <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-md-8 col-md-offset-2">
+      <div id="userform">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+          <li class="active"><a href="#signup"  role="tab" data-toggle="tab">Sign up</a></li>
+          <li><a href="#login"  role="tab" data-toggle="tab">Log in</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane fade active in" id="signup">
+            <h2 class="text-uppercase text-center"> Sign Up for Free</h2>
+            <form id="signup" method="POST" action="/register">
+                <div class="form-group">
+                  <label>First Name<span class="req">*</span> </label>
+                  <input type="text" class="form-control" id="first_name" name="firstname" required data-validation-required-message="Please enter your name." autocomplete="off">
+                  <p class="help-block text-danger"></p>
+                </div>
+                  <div class="form-group">
+                    <label> Last Name<span class="req">*</span> </label>
+                    <input type="text" class="form-control" id="last_name" name="lastname" required data-validation-required-message="Please enter your name." autocomplete="off">
+                    <p class="help-block text-danger"></p>
+                  </div>
+              <div class="form-group">
+                <label> Your Email<span class="req">*</span> </label>
+                <input type="email" class="form-control" id="email" name="email" required data-validation-required-message="Please enter your email address." autocomplete="off">
+                <p class="help-block text-danger"></p>
+              </div>
+              <div class="form-group">
+                <label> Password<span class="req">*</span> </label>
+                <input type="password" class="form-control" id="password" name="password" required data-validation-required-message="Please enter your password" autocomplete="off">
+                <p class="help-block text-danger"></p>
+              </div>
+              <div class="mrgn-30-top">
+                <button type="submit" class="btn btn-larger btn-block"/>
+                Sign up
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="tab-pane fade in" id="login">
+            <h2 class="text-uppercase text-center"> Log in</h2>
+            
+          
+            <form id="login" method="POST" action="/login">
+              <div class="form-group">
+                <label> Your Email<span class="req">*</span> </label>
+                <input type="email" class="form-control" id="email" name="email" required data-validation-required-message="Please enter your email address." autocomplete="off">
+                <p class="help-block text-danger"></p>
+              </div>
+              <div class="form-group">
+                <label> Password<span class="req">*</span> </label>
+                <input type="password" class="form-control" id="password" name="password" required data-validation-required-message="Please enter your password" autocomplete="off">
+                <p class="help-block text-danger"></p>
+              </div>
+              <div class="mrgn-30-top">
+                <button type="submit" class="btn btn-larger btn-block"/>
+                Log in
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <row>
+      <h1 class="center">it's all about friends</h1>
+  </row>
+  <!-- /.container -->
+</div>
+<script src="js/login.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
 </html>
