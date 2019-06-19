@@ -38,7 +38,7 @@ app.post('/signup', async (req, res) => {
         
         // we test if the user exist if it does not we insert into
         if (req.body.email !== validUser(user)) {
-            const query = await db.query(pool, 'INSERT INTO users(fullname, email, password, passwordTwo) VALUES($1, $2, $3, $4) RETURNING *', [req.body.fullname, req.body.email, req.body.password, req.body.passwordTwo,])
+            const query = await db.query(pool, 'INSERT INTO users(fullname, email, password) VALUES($1, $2, $3) RETURNING *', [req.body.fullname, req.body.email, req.body.password])
             return res.render('dashboard', {
                 username: query.email
             })
