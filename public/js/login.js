@@ -1,45 +1,65 @@
-$(document).ready(function(){
-    $('#form').find('input, textarea').on('keyup blur focus', function (e) {
+function toggleResetPswd(e){
+    e.preventDefault();
+    $('#logreg-forms .form-signin').toggle() // display:block or none
+    $('#logreg-forms .form-reset').toggle() // display:block or none
+}
 
-        var $this = $(this),
-            label = $this.prev('label');
+function toggleSignUp(e){
+    e.preventDefault();
+    $('#logreg-forms .form-signin').toggle(); // display:block or none
+    $('#logreg-forms .form-signup').toggle(); // display:block or none
+}
 
-        if (e.type === 'keyup') {
-            if ($this.val() === '') {
-                label.removeClass('active highlight');
-            } else {
-                label.addClass('active highlight');
-            }
-        } else if (e.type === 'blur') {
-            if( $this.val() === '' ) {
-                label.removeClass('active highlight');
-            } else {
-                label.removeClass('highlight');
-            }
-        } else if (e.type === 'focus') {
+$(()=>{
+    // Login Register Form
+    $('#logreg-forms #forgot_pswd').click(toggleResetPswd);
+    $('#logreg-forms #cancel_reset').click(toggleResetPswd);
+    $('#logreg-forms #btn-signup').click(toggleSignUp);
+    $('#logreg-forms #cancel_signup').click(toggleSignUp);
+})
 
-            if( $this.val() === '' ) {
-                label.removeClass('highlight');
-            }
-            else if( $this.val() !== '' ) {
-                label.addClass('highlight');
-            }
-        }
+// $(document).ready(function(){
+//     $('#form').find('input, textarea').on('keyup blur focus', function (e) {
 
-    });
+//         var $this = $(this),
+//             label = $this.prev('label');
 
-    $('.tab a').on('click', function (e) {
+//         if (e.type === 'keyup') {
+//             if ($this.val() === '') {
+//                 label.removeClass('active highlight');
+//             } else {
+//                 label.addClass('active highlight');
+//             }
+//         } else if (e.type === 'blur') {
+//             if( $this.val() === '' ) {
+//                 label.removeClass('active highlight');
+//             } else {
+//                 label.removeClass('highlight');
+//             }
+//         } else if (e.type === 'focus') {
 
-        e.preventDefault();
+//             if( $this.val() === '' ) {
+//                 label.removeClass('highlight');
+//             }
+//             else if( $this.val() !== '' ) {
+//                 label.addClass('highlight');
+//             }
+//         }
 
-        $(this).parent().addClass('active');
-        $(this).parent().siblings().removeClass('active');
+//     });
 
-        target = $(this).attr('href');
+//     $('.tab a').on('click', function (e) {
 
-        $('.tab-content > div').not(target).hide();
+//         e.preventDefault();
 
-        $(target).fadeIn(800);
+//         $(this).parent().addClass('active');
+//         $(this).parent().siblings().removeClass('active');
 
-    });
-});
+//         target = $(this).attr('href');
+
+//         $('.tab-content > div').not(target).hide();
+
+//         $(target).fadeIn(800);
+
+//     });
+// });

@@ -22,22 +22,32 @@ app.get('/login', (req, res) => {
     res.render('login')
 })
 
-app.get('/register', (req, res) => {
-    res.render('register')
-})
+// app.get('/signup', (req, res) => {
+//     res.render('signup')
+// })
 
-app.post('/register', async (req, res) => {
-    // we execute a sql query to find if the user exist in th db
-    const user = await db.query(pool, `SELECT * FROM users WHERE email='${req.body.email}'`)
+function validUser(user){
+    return user[0] ? user[0].email : false
+}
 
-    // we test if the user exist if it does not we insert into 
-    if (req.body.email !== user.rows[0].email) {
-        const query = await db.query(pool, 'INSERT INTO users(firstname, lastname, email, password) VALUES($1, $2, $3, $4) RETURNING *', [req.body.firstname, req.body.lastname, req.body.email, req.body.password])
-        return res.render('dashboard', {
-            username: query.email
-        })
+app.post('/signup', async (req, res) => {
+    console.log(req.body);
+    try {
+        // we execute a sql query to find if the user exist in th db
+        const user = await db.query(pool, `SELECT * FROM users WHERE email='${req.body.email}'`)
+        
+        // we test if the user exist if it does not we insert into
+        if (req.body.email !== validUser(user)) {
+            const query = await db.query(pool, 'INSERT INTO users(fullname, email, password, passwordTwo) VALUES($1, $2, $3, $4) RETURNING *', [req.body.fullname, req.body.email, req.body.password, req.body.passwordTwo,])
+            return res.render('dashboard', {
+                username: query.email
+            })
+        }
+        return res.redirect('/')     
+    } catch (error) {
+        console.log('Something weird happened', error)
     }
-    return res.redirect('/login')
+
 })
 
 app.post('/login', async (req, res) => {
