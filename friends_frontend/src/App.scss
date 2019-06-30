@@ -1,0 +1,38 @@
+
+$primary-color: #FF2D55;
+$secondary-color: #FFCC00;
+$background-primary: #1C1C1C;
+$white: #FFFFFF;
+
+.App {
+  text-align: center;
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+  }
+  .App-intro {
+    font-size: large;
+  }
+  .App-header {
+    background-color: $background-primary;
+    height: 150px;
+    padding: 20px;
+    color: $white;
+    margin-top: 100px;
+  }
+
+  h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 100px;
+    font-weight: 300;
+    margin-bottom: -34px;
+    margin-top: -10px;
+  }
+}
+
+
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
