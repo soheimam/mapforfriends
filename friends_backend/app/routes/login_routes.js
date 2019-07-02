@@ -8,7 +8,8 @@
 
 module.exports = function (app, db) {
     app.post('/login', (req, res) => {
-
+        console.log('Hello!')
+        console.log(req.body)
         db.collection('users').findOne({ email: req.body.email }, (err, result) => {
             if (err) {
                 res.send({ 'error': 'An error has occurred' });
@@ -17,20 +18,7 @@ module.exports = function (app, db) {
                     result.password === req.body.password ? 'somethig' : 'something else'
                     res.status(200)
                 }
-                
             }
-        });
-    });
-    app.get('/locations/:id', (req, res) => {
-
-        db.collection('locations').find({}).toArray( (err, result) => {
-            if (err) {
-                res.send({ 'error': 'An error has occurred' });
-            } else {
-                res.send(result);
-            }
-
-            db.close();
         });
     });
 };
