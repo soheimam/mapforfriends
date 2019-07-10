@@ -1,8 +1,11 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/default.json
+friends_backend/node_modules
+friends_frontend/node_modules
+
+
+friends_backend/config/default.json
 # testing
 /coverage
 
