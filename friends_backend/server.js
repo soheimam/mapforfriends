@@ -1,25 +1,23 @@
-const express        = require('express');
-const MongoClient    = require('mongodb').MongoClient;
-const bodyParser     = require('body-parser');
-const db             = require('./config/db');
+const express = require('express');
+const connectDB = require('./config/db');
+var cors = require('cors')
+const app = express();
+//Connect Database
+connectDB();
 
-const app            = express();
 
-const port = 8000;
-const cors = require('cors')
-
+//Init middleware
+app.use(express.json ({extended:false}));
 app.use(cors())
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
- 
-// parse application/json
-app.use(bodyParser.json())
 
-MongoClient.connect(db.url, (err, conn) => {
-    const database = conn.db("dev-friend")
-    if (err) return console.log(err);
-        require('./app/routes/index')(app, database);
-        app.listen(port, () => {    console.log('We are live on ' + port);
-    });
-})
+app.get('/', (req, res) => res.send(`API Running`));
 
+//Define Routes
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/posts', require('./routes/api/posts'));
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server started on ${PORT}`));

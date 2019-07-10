@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-
+/default.json
 # testing
 /coverage
 

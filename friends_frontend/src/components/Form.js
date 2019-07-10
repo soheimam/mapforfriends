@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { inputStyle } from './styles/Text';
 import { Button } from './styles/Button'
+import logo from '../logo.svg';
 const axios = require('axios');
 
 class Form extends React.Component {
@@ -27,12 +28,12 @@ class Form extends React.Component {
       console.log(event)
       console.log(this.state)
       event.preventDefault();
-      axios.post('http://localhost:8000/login', {
+      axios.post('http://localhost:5000/api/auth', {
         email: this.state.email,
         password: this.state.password
       })
       .then(function (response) {
-        console.log(response);
+        this.props.history.push('/thank-you');
       })
       .catch(function (error) {
         console.log(error);
@@ -41,17 +42,26 @@ class Form extends React.Component {
   
     render() {
       return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-              <input type="text"  name="email" style={inputStyle} value={this.state.email} onChange={this.handleEmail}/>
-          </label>
-          <label>
-            Password:
-              <input type="text"  name="password" style={inputStyle} value={this.state.password} onChange={this.handlePassword}/>
-          </label>
-          <Button login> Login </Button>
-        </form>
+        <div className="App">
+          <div className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h2>FRIENDS</h2>
+              <p className="App-intro">
+                  Maps for and by friends!
+              </p>
+              <form onSubmit={this.handleSubmit}>
+            <label>
+              Name:
+                <input type="text"  name="email" style={inputStyle} value={this.state.email} onChange={this.handleEmail}/>
+            </label>
+            <label>
+              Password:
+                <input type="text"  name="password" style={inputStyle} value={this.state.password} onChange={this.handlePassword}/>
+            </label>
+            <Button login> Login </Button>
+          </form>
+          </div>
+        </div>
       );
     }
   }
